@@ -13,6 +13,6 @@ defmodule Example do
 
   """
   def hello do
-    :world
+    IO.puts(:world)
   end
 end
