@@ -7,21 +7,12 @@ defmodule Example do
   end
 
   def main do
-    IO.puts(:"Hello world!") # This is an atom.
-    IO.puts("Hello world" <> "!") # This is a string.
+    # Escaping characters
+    IO.puts("Hello there!\nI am Dulina Perera.\n")
+    IO.puts("Interpolation looks like \#{}.")
 
-    name = "Dulina"
-    status = Enum.random([:gold, :silver, :bronze, :"no status"])
-
-    # if status == :gold do
-    #   IO.puts("Welcome to the club, #{name}!")
-    # else
-    #   IO.puts("Get out bruh!")
-    # end
-    case status do
-      :gold -> IO.puts("Welcome to the club, #{name}!")
-      :"no status" -> IO.puts("Get subscribed!")
-      _ -> IO.puts("Get out bruh!")
-    end
+    # Unicode
+    IO.puts(?∆)
+    IO.puts("Unicode: \u{1F49A}")
   end
 end
