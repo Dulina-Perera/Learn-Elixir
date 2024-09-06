@@ -1,16 +1,27 @@
 defmodule Example do
   use Application
 
-  @x 5 # Bind x to 5. x is a compile-time attribute.
-
   def start(_type, _args) do
     Example.main()
     Supervisor.start_link([], strategy: :one_for_one)
   end
 
   def main do
-    x = 9 # Bind x to 9. x is a runtime variable.
-    x = 6 # Rebind x to 6. x is a runtime variable.
-    IO.puts(x + @x) # 6 + 5 = 11
+    IO.puts(:"Hello world!") # This is an atom.
+    IO.puts("Hello world" <> "!") # This is a string.
+
+    name = "Dulina"
+    status = Enum.random([:gold, :silver, :bronze, :"no status"])
+
+    # if status == :gold do
+    #   IO.puts("Welcome to the club, #{name}!")
+    # else
+    #   IO.puts("Get out bruh!")
+    # end
+    case status do
+      :gold -> IO.puts("Welcome to the club, #{name}!")
+      :"no status" -> IO.puts("Get subscribed!")
+      _ -> IO.puts("Get out bruh!")
+    end
   end
 end
