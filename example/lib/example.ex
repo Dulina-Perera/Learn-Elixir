@@ -7,12 +7,11 @@ defmodule Example do
   end
 
   def main do
-    # Escaping characters
-    IO.puts("Hello there!\nI am Dulina Perera.\n")
-    IO.puts("Interpolation looks like \#{}.")
-
-    # Unicode
-    IO.puts(?∆)
-    IO.puts("Unicode: \u{1F49A}")
+    a = 10
+    b = 9.0
+    IO.puts("a + b = #{a + b}")
+    :io.format("~.20f\n", [0.1])
+    IO.puts(Integer.gcd(13971, 637613))
+    IO.puts(Float.ceil(9.1))
   end
 end
