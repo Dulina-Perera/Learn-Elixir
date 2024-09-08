@@ -7,16 +7,20 @@ defmodule Example do
   end
 
   def main do
-    next_year = DateTime.new!(Date.new!(Date.utc_today().year + 1, 1, 1), Time.new!(0, 0, 0, 0), "Etc/UTC")
+    memberships = {:bronze, :silver, :gold}
+    memberships = Tuple.append(memberships, :platinum)
+    IO.inspect(memberships)
 
-    secs_till_next_year = DateTime.diff(next_year, DateTime.utc_now(), :second)
-    days_till_next_year = div(secs_till_next_year, 86400)
-    hours = div(rem(secs_till_next_year, 86400), 3600)
-    minutes = div(rem(secs_till_next_year, 3600), 60)
-    seconds = rem(secs_till_next_year, 60)
+    prices = {10, 20, 30, 40}
+    avg = Tuple.sum(prices) / tuple_size(prices)
+    IO.inspect(avg)
 
     IO.puts(
-      "New year is #{days_till_next_year} days and #{hours} hours and #{minutes} minutes and #{seconds} seconds away."
+      "Average price for #{elem(memberships, 0)} #{elem(memberships, 1)} #{elem(memberships, 2)} #{elem(memberships, 3)} is #{avg}."
     )
+
+    user = {"Dulina", 23, :gold}
+    {name, age, membership} = user
+    IO.puts("#{name} is #{age} years old and has a #{membership} membership.")
   end
 end
