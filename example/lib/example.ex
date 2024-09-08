@@ -7,11 +7,11 @@ defmodule Example do
   end
 
   def main do
-    a = 10
-    b = 9.0
-    IO.puts("a + b = #{a + b}")
-    :io.format("~.20f\n", [0.1])
-    IO.puts(Integer.gcd(13971, 637613))
-    IO.puts(Float.ceil(9.1))
+    date = Date.new!(2024, 09, 08)
+    time = Time.new!(18, 58, 32)
+    datetime = DateTime.new!(date, time, "Etc/UTC")
+
+    IO.inspect(datetime)
+    IO.puts(datetime.year)
   end
 end
