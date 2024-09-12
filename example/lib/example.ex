@@ -19,8 +19,13 @@ defmodule Example do
       "Average price for #{elem(memberships, 0)} #{elem(memberships, 1)} #{elem(memberships, 2)} #{elem(memberships, 3)} is #{avg}."
     )
 
-    user = {"Dulina", 23, :gold}
-    {name, age, membership} = user
-    IO.puts("#{name} is #{age} years old and has a #{membership} membership.")
+    users = [
+      {"John", 30, :silver},
+      {"Jane", 25, :bronze},
+      {"Doe", 35, :gold}
+    ]
+    Enum.each(users, fn {name, age, membership} -> {
+      IO.puts("#{name} is #{age} years old and has a #{membership} membership.")
+    } end)
   end
 end
