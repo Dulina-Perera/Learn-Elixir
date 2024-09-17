@@ -1,3 +1,11 @@
+defmodule Membership do
+  defstruct [:type, :price]
+end
+
+defmodule User do
+  defstruct [:name, :age, :membership]
+end
+
 defmodule Example do
   use Application
 
@@ -7,27 +15,19 @@ defmodule Example do
   end
 
   def main do
-    memberships = %{
-      gold: :gold,
-      silver: :silver,
-      bronze: :bronze,
-      none: :none
-    }
-
-    prices = %{
-      gold: 100,
-      silver: 50,
-      bronze: 25,
-      none: 0
-    }
+    gold_membership = %Membership{type: :gold, price: 100}
+    silver_membership = %Membership{type: :silver, price: 75}
+    bronze_membership = %Membership{type: :bronze, price: 50}
+    none_membership = %Membership{type: :none, price: 0}
 
     users = [
-      {"John", 30, memberships.silver},
-      {"Jane", 25, memberships.gold},
-      {"Doe", 35, memberships.none}
+      %User{name: "John", age: 30, membership: silver_membership},
+      %User{name: "Jane", age: 25, membership: gold_membership},
+      %User{name: "Jim", age: 40, membership: bronze_membership},
+      %User{name: "Jill", age: 35, membership: none_membership}
     ]
-    Enum.each(users, fn {name, age, membership} -> {
-      IO.puts("#{name} is #{age} years old and has a #{membership} membership with a price of #{prices[membership]}.")
+    Enum.each(users, fn %User{name: name, age: age, membership: membership} -> {
+      IO.puts("#{name} is #{age} years old and has a #{membership.type} membership with a price of #{membership.price}.")
     } end)
   end
 end
