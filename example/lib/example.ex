@@ -1,11 +1,3 @@
-defmodule Membership do
-  defstruct [:type, :price]
-end
-
-defmodule User do
-  defstruct [:name, :age, :membership]
-end
-
 defmodule Example do
   use Application
 
@@ -15,19 +7,13 @@ defmodule Example do
   end
 
   def main do
-    gold_membership = %Membership{type: :gold, price: 100}
-    silver_membership = %Membership{type: :silver, price: 75}
-    bronze_membership = %Membership{type: :bronze, price: 50}
-    none_membership = %Membership{type: :none, price: 0}
+    correct = :rand.uniform(10) - 1
 
-    users = [
-      %User{name: "John", age: 30, membership: silver_membership},
-      %User{name: "Jane", age: 25, membership: gold_membership},
-      %User{name: "Jim", age: 40, membership: bronze_membership},
-      %User{name: "Jill", age: 35, membership: none_membership}
-    ]
-    Enum.each(users, fn %User{name: name, age: age, membership: membership} -> {
-      IO.puts("#{name} is #{age} years old and has a #{membership.type} membership with a price of #{membership.price}.")
-    } end)
+    guess = IO.gets("Guess a number between 0 and 9: ") |> String.trim() |> String.to_integer()
+    if guess == correct do
+      IO.puts("You guessed correctly!")
+    else
+      IO.puts("You guessed wrong! The correct number was #{correct}")
+    end
   end
 end
