@@ -9,11 +9,14 @@ defmodule Example do
   def main do
     correct = :rand.uniform(10) - 1
 
-    guess = IO.gets("Guess a number between 0 and 9: ") |> String.trim() |> String.to_integer()
-    if guess == correct do
-      IO.puts("You guessed correctly!")
-    else
-      IO.puts("You guessed wrong! The correct number was #{correct}")
+    guess = IO.gets("Guess a number between 0 and 9: ") |> String.trim() |> Integer.parse()
+    IO.inspect(guess)
+
+    case guess do
+      {num, _} when num < correct -> IO.puts("Too low!")
+      {num, _} when num > correct -> IO.puts("Too high!")
+      {num, _} when num == correct -> IO.puts("Correct!")
+      :error -> IO.puts("Invalid input")
     end
   end
 end
