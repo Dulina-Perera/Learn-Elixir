@@ -1,4 +1,5 @@
 defmodule Example do
+  require Integer
   use Application
 
   def start(_type, _args) do
@@ -7,16 +8,20 @@ defmodule Example do
   end
 
   def main do
-    correct = :rand.uniform(10) - 1
+    grades = [45, 55, 65, 75]
+    moderated_grades = for grade <- grades, do: grade + 5
+    IO.inspect(moderated_grades, charlists: :aslists)
 
-    guess = IO.gets("Guess a number between 0 and 9: ") |> String.trim() |> Integer.parse()
-    IO.inspect(guess)
+    moderated_grades = moderated_grades ++ [85]
+    IO.inspect(moderated_grades, charlists: :aslists)
 
-    case guess do
-      {num, _} when num < correct -> IO.puts("Too low!")
-      {num, _} when num > correct -> IO.puts("Too high!")
-      {num, _} when num == correct -> IO.puts("Correct!")
-      :error -> IO.puts("Invalid input")
-    end
+    moderated_grades = [35 | moderated_grades]
+    IO.inspect(moderated_grades, charlists: :aslists)
+
+    even_grades = for grade <- moderated_grades, rem(grade, 2) == 0, do: grade
+    IO.inspect(even_grades, charlists: :aslists)
+
+    odd_grades = for grade <- moderated_grades, Integer.is_odd(grade), do: grade
+    IO.inspect(odd_grades, charlists: :aslists)
   end
 end
