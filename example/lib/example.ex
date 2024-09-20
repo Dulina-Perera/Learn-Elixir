@@ -7,21 +7,26 @@ defmodule Example do
     Supervisor.start_link([], strategy: :one_for_one)
   end
 
+  def get_numbers do
+    user_input = IO.gets("Enter a list of integers separated by spaces: ") |> String.trim()
+    String.split(user_input, " ") |> Enum.map(&String.to_integer/1) # Capture operator
+  end
+
+  def print_list(list) do
+    list |> Enum.join(" ") |> IO.puts()
+  end
+
+  def sum_and_average(numbers) do
+    sum = Enum.sum(numbers)
+    average = sum / Enum.count(numbers)
+    {sum, average}
+  end
+
   def main do
-    grades = [45, 55, 65, 75]
-    moderated_grades = for grade <- grades, do: grade + 5
-    IO.inspect(moderated_grades, charlists: :aslists)
+    numbers = get_numbers()
 
-    moderated_grades = moderated_grades ++ [85]
-    IO.inspect(moderated_grades, charlists: :aslists)
-
-    moderated_grades = [35 | moderated_grades]
-    IO.inspect(moderated_grades, charlists: :aslists)
-
-    even_grades = for grade <- moderated_grades, rem(grade, 2) == 0, do: grade
-    IO.inspect(even_grades, charlists: :aslists)
-
-    odd_grades = for grade <- moderated_grades, Integer.is_odd(grade), do: grade
-    IO.inspect(odd_grades, charlists: :aslists)
+    IO.puts("\nYou entered: #{inspect(numbers)}")
+    {sum, average} = sum_and_average(numbers)
+    IO.inspect("Sum: #{sum}, Average: #{average}")
   end
 end
